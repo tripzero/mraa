@@ -29,10 +29,12 @@ string (REGEX REPLACE "^v[0-9]+\\.([0-9]+).*" "\\1" VERSION_MINOR "${VERSION}")
 string (REGEX REPLACE "^v[0-9]+\\.[0-9]+\\.([0-9]+).*" "\\1" VERSION_PATCH "${VERSION}")
 string (REGEX REPLACE "^v[0-9]+\\.[0-9]+\\.[0-9]+\\-([0-9]+).*" "\\1" VERSION_COMMIT "${VERSION}")
 string (REGEX REPLACE "^v[0-9]+\\.[0-9]+\\.[0-9]+-[0-9]+\\-(.*)" "\\1" VERSION_SHA1 "${VERSION}")
+set (VERSION_COMMIT_PYTHON ".post${VERSION_COMMIT}")
 set (VERSION_SHORT "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 
 if ("${VERSION_COMMIT}" MATCHES "^v.*")
   set (VERSION_COMMIT "")
+  set (VERSION_COMMIT_PYTHON "")
 endif()
 
 configure_file (${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/version.c.in
